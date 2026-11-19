@@ -3,20 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Neon Palms — GTA 6 Cover Art Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="controls" aria-label="Cover editor">
+    <h1>Neon Palms</h1>
+    <p class="tag">Cover art dulu. Six panels, one giant title, a sunset grade — your photos, exported as a PNG to post.</p>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <label class="file">One photo for all panels
+        <input id="photoAll" type="file" accept="image/*">
+      </label>
+      <div class="row">
+        <button id="samples" type="button">Load the sample set</button>
+        <button id="clearPhotos" type="button">Clear all</button>
+      </div>
+      <p class="hint">Click a panel below, or click a panel on the cover, then replace just that one. Drag on the cover to move a photo, scroll to zoom it.</p>
+      <div class="panels" id="panelPicker" role="group" aria-label="Choose a panel to edit"></div>
+      <label>Photo for the selected panel
+        <input id="photoOne" type="file" accept="image/*">
+      </label>
+      <label>Panel label <input id="panelLabel" type="text" maxlength="24" value="THE DRIVER"></label>
+      <label>Zoom <input id="zoom" type="range" min="1" max="3" step="0.05" value="1"></label>
+      <label>Move left / right <input id="offx" type="range" min="-1" max="1" step="0.05" value="0"></label>
+      <label>Move up / down <input id="offy" type="range" min="-1" max="1" step="0.05" value="0"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Words</legend>
+      <label>Giant title <input id="title" type="text" maxlength="24" value="NEON PALMS"></label>
+      <label>Script subtitle <input id="subtitle" type="text" maxlength="48" value="chasing the last sunset"></label>
+      <label>Tagline <input id="tagline" type="text" maxlength="64" value="ONE LAST DRIVE · NO BRAKES · NO REGRETS"></label>
+      <label>Star quote <input id="quote" type="text" maxlength="64" value="A SUNSET THAT NEVER ENDS"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Grade</legend>
+      <div class="row" id="grades">
+        <button type="button" data-grade="sunset" class="grade-btn active">Sunset</button>
+        <button type="button" data-grade="neon" class="grade-btn">Neon</button>
+        <button type="button" data-grade="dusk" class="grade-btn">Dusk</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Export size</legend>
+      <div class="row sizes">
+        <label><input type="radio" name="size" value="1920x1080" checked> 1920 × 1080</label>
+        <label><input type="radio" name="size" value="1080x1080"> 1080 × 1080</label>
+        <label><input type="radio" name="size" value="1080x1350"> 1080 × 1350</label>
+      </div>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <p id="status" role="status">Loading the sample photos…</p>
+    </fieldset>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <section class="stage">
+    <canvas id="cover" width="1920" height="1080" aria-label="The cover, live preview"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>

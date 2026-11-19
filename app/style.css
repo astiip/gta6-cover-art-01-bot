@@ -1,12 +1,29 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
+html, body { margin: 0; min-height: 100%; background: #160a26; color: #f4e9f7; font: 15px/1.45 system-ui, sans-serif; }
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 22px; box-sizing: border-box; }
+.controls { display: flex; flex-direction: column; gap: 14px; width: 320px; flex: none; }
+.controls h1 { margin: 0; font-size: 34px; letter-spacing: 1px; color: #ffb347; text-shadow: 0 0 18px rgba(255, 46, 136, .7); font-family: "Arial Black", "Noto Sans", sans-serif; }
+.tag { margin: 0; color: #c9a8d8; }
+fieldset { border: 1px solid #4a2560; border-radius: 10px; padding: 12px; margin: 0; }
+legend { font-weight: 800; color: #ff9ecf; padding: 0 6px; }
+label { display: flex; flex-direction: column; gap: 5px; font-weight: 600; margin-top: 8px; }
+label:first-child { margin-top: 0; }
+input[type=text] { font: inherit; padding: 8px; border: 1px solid #6b3a86; border-radius: 6px; background: #241238; color: #fff; }
+input[type=range] { width: 100%; accent-color: #ff2e88; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+.row.sizes label { flex-direction: row; align-items: center; gap: 6px; margin: 0; font-weight: 600; }
+button { font: inherit; font-weight: 700; padding: 9px 12px; border: 1px solid #6b3a86; border-radius: 8px; background: #2c1544; color: #ffe9f4; cursor: pointer; }
+button:hover { border-color: #ff2e88; }
+button.primary { width: 100%; padding: 12px; background: #ff2e88; border-color: #ff2e88; color: #fff; font-size: 17px; margin-top: 10px; }
+button.active { background: #ff2e88; border-color: #ff2e88; color: #fff; }
+.hint { margin: 8px 0 0; font-size: 13px; color: #c9a8d8; }
+.panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 10px; }
+.panels button { padding: 7px 4px; font-size: 12px; }
+.panels button.selected { background: #ff2e88; border-color: #ff2e88; color: #fff; }
+#status { margin: 8px 0 0; color: #9fe8ff; font-size: 13px; }
+.stage { flex: 1; min-width: 0; display: flex; justify-content: center; position: sticky; top: 22px; }
+canvas { max-width: 100%; max-height: calc(100vh - 44px); width: auto; height: auto; box-shadow: 0 10px 44px rgba(0, 0, 0, .55); cursor: grab; }
+canvas:active { cursor: grabbing; }
 body.shot-cover .controls { display: none; }
 body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover .stage { position: static; }
+body.shot-cover canvas { max-width: none; max-height: none; width: 100vw; height: 100vh; box-shadow: none; }
