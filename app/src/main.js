@@ -1,4 +1,4 @@
-// Neon Palms — wires the editor: six photo panels with per-panel crop, editable
+// Palm Light — wires the editor: six photo panels with per-panel crop, editable
 // words, three sunset/neon grades and three export sizes, with a live preview.
 // Photos stay on the user's own machine: picked files are read locally and
 // never uploaded. A `?shot=` query sets up a fixed scene for a screenshot.
@@ -26,10 +26,10 @@ const state = {
   photos: [null, null, null, null, null, null],
   crops: Array.from({ length: 6 }, () => ({ zoom: 1, ox: 0, oy: 0 })),
   labels: [...PANEL_LABELS],
-  title: 'NEON PALMS',
-  subtitle: 'chasing the last sunset',
-  tagline: 'ONE LAST DRIVE · NO BRAKES · NO REGRETS',
-  quote: 'A SUNSET THAT NEVER ENDS',
+  title: 'PALM LIGHT',
+  subtitle: 'golden hour, every hour',
+  tagline: 'SIX FRAMES · ONE CITY · NO CURFEW',
+  quote: 'A COASTLINE FULL OF TROUBLE',
   grade: 'sunset',
   size: '1920x1080',
   selected: 0,
@@ -197,9 +197,9 @@ export function exportPng() {
     if (!blob) return;
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `neon-palms-${w}x${h}.png`;
+    a.download = `palm-light-${w}x${h}.png`;
     a.click();
-    status.textContent = `Saved neon-palms-${w}x${h}.png — post it.`;
+    status.textContent = `Saved palm-light-${w}x${h}.png — post it.`;
   }, 'image/png');
 }
 

@@ -1,4 +1,4 @@
-// Neon Palms — a gta6-cover-art-01 entry (Node 22, standard library only).
+// Palm Light — a gta6-cover-art-01 entry (Node 22, standard library only).
 // The app is plain static files under app/: index.html plus its own ES modules
 // and sample photos, no network request, no build step. This program hands the
 // entry in: it copies app/ and screenshots/ from beside this file into the

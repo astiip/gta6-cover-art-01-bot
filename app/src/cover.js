@@ -1,4 +1,4 @@
-// Neon Palms — the cover renderer. Draws the whole multi-panel GTA-style poster
+// Palm Light — the cover renderer. Draws the whole multi-panel GTA-style poster
 // onto any 2D canvas: six photo panels with a sunset/neon grade, one giant
 // gradient title with a script subtitle, a star quote strip, a tagline pill,
 // a gold "ORIGINAL COVER ART" seal, a barcode and a footer. Every size is a
@@ -6,11 +6,11 @@
 // and 1080x1350. No Rockstar logo, artwork or font is used anywhere here.
 
 export const PANEL_LABELS = [
-  'THE DRIVER',
+  'THE WHEELMAN',
   'THE FIXER',
-  'TOWER 5',
-  'OCEAN DRIVE',
-  'PIER 26',
+  'STATION 5',
+  'THE STRIP',
+  'PIER 9',
   'PALM ROW',
 ];
 
@@ -123,7 +123,7 @@ export function drawPanelLabel(ctx, rect, text, atBottom) {
 
 /** The giant gradient title, fitted to the canvas width, slightly condensed. */
 export function drawGiantTitle(ctx, w, h, title) {
-  const words = title.trim().toUpperCase() || 'NEON PALMS';
+  const words = title.trim().toUpperCase() || 'PALM LIGHT';
   const cy = h * 0.475;
   let size = w * 0.148;
   ctx.save();
@@ -159,7 +159,7 @@ export function drawGiantTitle(ctx, w, h, title) {
 
 /** The pink script-style subtitle, overlapping the foot of the title. */
 export function drawScriptSubtitle(ctx, w, h, subtitle, titleSize) {
-  const text = subtitle.trim() || 'chasing the last sunset';
+  const text = subtitle.trim() || 'golden hour, every hour';
   const y = h * 0.475 + titleSize * 0.52 + h * 0.03;
   let size = w * 0.052;
   ctx.save();
@@ -259,26 +259,27 @@ export function drawCover(canvas, photos, crops, text, grade) {
   ctx.fillStyle = wash;
   ctx.fillRect(0, 0, w, h);
 
-  // Header: five stars + quote on the left, VOL badge on the right.
+  // Header: VOL badge on the left, then five stars + quote on the right.
   const hy = h * 0.036;
-  ctx.textBaseline = 'middle';
-  ctx.textAlign = 'left';
-  ctx.font = `800 ${Math.max(12, Math.round(w * 0.016))}px "Noto Sans", sans-serif`;
-  ctx.fillStyle = '#ffc21c';
-  ctx.fillText('★ ★ ★ ★ ★', m, hy);
-  const starsW = ctx.measureText('★ ★ ★ ★ ★  ').width;
-  ctx.fillStyle = '#ffe9f4';
-  ctx.font = `700 ${Math.max(11, Math.round(w * 0.0145))}px "Noto Sans", sans-serif`;
-  ctx.fillText(`"${(text.quote || '').toUpperCase()}"  —  THE VICE HERALD`, m + starsW, hy);
   const vol = 'VOL. 2';
   ctx.font = `900 ${Math.max(12, Math.round(w * 0.017))}px "Arial Black", "Noto Sans", sans-serif`;
   const vw = ctx.measureText(vol).width + w * 0.03;
   const vh = h * 0.038;
   ctx.fillStyle = '#ffc21c';
-  ctx.fillRect(w - m - vw, hy - vh / 2, vw, vh);
+  ctx.fillRect(m, hy - vh / 2, vw, vh);
   ctx.fillStyle = '#2a0a4a';
   ctx.textAlign = 'center';
-  ctx.fillText(vol, w - m - vw / 2, hy + 1);
+  ctx.textBaseline = 'middle';
+  ctx.fillText(vol, m + vw / 2, hy + 1);
+  const hx = m + vw + w * 0.014;
+  ctx.textAlign = 'left';
+  ctx.font = `800 ${Math.max(12, Math.round(w * 0.016))}px "Noto Sans", sans-serif`;
+  ctx.fillStyle = '#ffc21c';
+  ctx.fillText('★ ★ ★ ★ ★', hx, hy);
+  const starsW = ctx.measureText('★ ★ ★ ★ ★  ').width;
+  ctx.fillStyle = '#ffe9f4';
+  ctx.font = `700 ${Math.max(11, Math.round(w * 0.0145))}px "Noto Sans", sans-serif`;
+  ctx.fillText(`"${(text.quote || '').toUpperCase()}"  —  THE VICE HERALD`, hx + starsW, hy);
 
   // Six photo panels with the grade and their label chips.
   const rects = panelRects(w, h);
@@ -314,7 +315,7 @@ export function drawCover(canvas, photos, crops, text, grade) {
     ctx.restore();
   }
 
-  // Footer: COMING SOON, production line, barcode, gold seal.
+  // Footer: OUT THIS SUMMER, production line, barcode; the seal is top-right.
   const fy = h * 0.93;
   ctx.save();
   ctx.textAlign = 'left';
@@ -323,17 +324,21 @@ export function drawCover(canvas, photos, crops, text, grade) {
   ctx.fillStyle = '#ff5ea8';
   ctx.shadowColor = 'rgba(255, 46, 136, 0.9)';
   ctx.shadowBlur = Math.max(4, w * 0.008);
-  ctx.fillText('COMING SOON', m, fy);
+  ctx.fillText('OUT THIS SUMMER', m, fy);
   ctx.shadowBlur = 0;
   ctx.textAlign = 'center';
   ctx.font = `700 ${Math.max(10, Math.round(w * 0.0115))}px "Noto Sans", sans-serif`;
   ctx.fillStyle = '#e8d5f2';
-  ctx.fillText('A SUNSET PICTURES PRODUCTION  ·  STARRING YOU  ·  SHOT ON YOUR OWN CAMERA  ·  GRADED BY HAND', w / 2, fy);
+  ctx.fillText('A PALM LIGHT PICTURE  ·  STARRING YOU  ·  MADE FROM YOUR OWN PHOTOS', w / 2, fy);
   ctx.restore();
   const bw = w * 0.075;
   const bh = h * 0.032;
   drawBarcode(ctx, w - m - bw, fy - bh / 2, bw, bh);
-  drawSeal(ctx, w - m - bw - w * 0.055, h * 0.845, Math.min(w, h) * 0.058);
+  // The gold seal sits top-right, overlapping the corner of the last panel —
+  // the other covers put theirs at the bottom or the middle, so this one
+  // reads as its own poster at a glance.
+  const sealR = Math.min(w, h) * 0.058;
+  drawSeal(ctx, w - m - sealR * 0.85, Math.round(h * 0.062) + sealR * 0.85, sealR);
 
   // Thin inner frame, the poster's finishing edge.
   ctx.save();

@@ -1,4 +1,4 @@
-# Neon Palms — Make GTA 6 Cover Art
+# Palm Light — Make GTA 6 Cover Art
 
 [![gta6-cover-art-01](https://make.fun/badge/gta6-cover-art-01.svg)](https://make.fun/c/gta6-cover-art-01)
 [![rank](https://make.fun/badge/gta6-cover-art-01/astiip/gta6-cover-art-01-bot/rank.svg)](https://make.fun/c/gta6-cover-art-01)
@@ -28,12 +28,14 @@ step. Photos are read on your own machine and never uploaded. Serve it with
 
 ## The cover
 
-Original design, original title **NEON PALMS** with the subtitle
-*chasing the last sunset* and the tagline
-"ONE LAST DRIVE · NO BRAKES · NO REGRETS". No Rockstar logo, artwork or
+Original design, original title **PALM LIGHT** with the subtitle
+*golden hour, every hour* and the tagline
+"SIX FRAMES · ONE CITY · NO CURFEW". No Rockstar logo, artwork or
 font is used anywhere. The title lettering is a system heavy sans drawn on
 canvas with a sunset gradient; the subtitle is a system italic serif with a
-neon-pink glow.
+neon-pink glow. The layout is its own: a uniform six-panel grid, the VOL
+badge top-left, the gold seal top-right, and the footer line
+"A PALM LIGHT PICTURE · STARRING YOU · MADE FROM YOUR OWN PHOTOS".
 
 ## Sample photos
 
